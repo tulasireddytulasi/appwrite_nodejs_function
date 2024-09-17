@@ -10,6 +10,22 @@ export default async ({ req, res, log, error }) => {
     .setKey(req.headers['x-appwrite-key'] ?? '');
   const users = new Users(client);
 
+
+  // The req object contains the request data
+  if (req.path === "/users") {
+     try {
+    const response = await users.list();
+    // Log messages and errors to the Appwrite Console
+    // These logs won't be seen by your end users
+    log(`Total users: ${response.total}`);
+
+    return res.text(${response.total});   
+  } catch(err) {
+    error("Could not list users: " + err.message);
+  }
+    
+  }
+
   try {
     const response = await users.list();
     // Log messages and errors to the Appwrite Console
