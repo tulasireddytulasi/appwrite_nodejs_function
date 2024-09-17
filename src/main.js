@@ -18,7 +18,12 @@ export default async ({ req, res, log, error }) => {
     
     log(`Total users: ${response.total}`);
 
-    return res.text(${response.total});   
+    //return res.text(${response.total.toString()});   
+
+       return res.json({
+    usersLit: response.total
+    
+  });
   } catch(err) {
     error("Could not list users: " + err.message);
   }
